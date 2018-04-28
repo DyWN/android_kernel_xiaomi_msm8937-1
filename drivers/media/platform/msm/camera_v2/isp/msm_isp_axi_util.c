@@ -2166,7 +2166,6 @@ int msm_isp_axi_reset(struct vfe_device *vfe_dev,
 			j--;
 			continue;
 		}
-
 		for (bufq_id = 0; bufq_id < VFE_BUF_QUEUE_MAX; bufq_id++) {
 			bufq_handle = stream_info->bufq_handle[bufq_id];
 			if (!bufq_handle)
