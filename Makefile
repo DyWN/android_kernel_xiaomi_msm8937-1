@@ -295,6 +295,14 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	  else if [ -x /bin/bash ]; then echo /bin/bash; \
 	  else echo sh; fi ; fi)
 
+POLLY     = 		-mllvm -polly \
+			-mllvm -polly-parallel\
+ 			-mllvm -polly-vectorizer=stripmine \
+			-mllvm -polly-run-dce \
+			-mllvm -polly-run-inliner \
+			-mllvm -polly-ast-use-context \
+			-mllvm -polly-pattern-matching-based-opts=true
+
 HOSTCC       = gcc
 HOSTCXX      = g++
 HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 -fomit-frame-pointer -std=gnu89
@@ -645,7 +653,7 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning,maybe-uninitialized,)
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= $(call cc-option,-Oz,-Os)
 else
-KBUILD_CFLAGS	+= -O3
+KBUILD_CFLAGS	+= -O3 $(POLLY)
 endif
 
 # Needed to unbreak GCC 7.x and above
