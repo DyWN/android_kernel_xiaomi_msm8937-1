@@ -1,1 +1,1 @@
-obj-y	:= Alessa_Plug.o
+obj-$(CONFIG_ALESSA_PLUG)	:= Alessa_Plug.o
