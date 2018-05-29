@@ -400,7 +400,7 @@ endif
 ifneq ($(CLANG_ENABLE_IA),1)
 CLANG_IA_FLAG	= -no-integrated-as
 endif
-CLANG_FLAGS	:= $(CLANG_TARGET) $(CLANG_GCC_TC) $(CLANG_IA_FLAG) -meabi gnu
+CLANG_FLAGS	:= $(CLANG_TARGET) $(CLANG_GCC_TC) $(CLANG_IA_FLAG) $(POLLY) -meabi gnu
 endif
 
 # Use USERINCLUDE when you must reference the UAPI directories only.
@@ -653,7 +653,7 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning,maybe-uninitialized,)
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= $(call cc-option,-Oz,-Os)
 else
-KBUILD_CFLAGS	+= -O3 $(POLLY)
+KBUILD_CFLAGS	+= -O3
 endif
 
 # Needed to unbreak GCC 7.x and above
