@@ -94,7 +94,7 @@ static const int bfq_back_max = (16 * 1024);
 static const int bfq_back_penalty = 2;
 
 /* Idling period duration, in ns. */
-static u32 bfq_slice_idle = (NSEC_PER_SEC / 125);
+static u32 bfq_slice_idle = (NSEC_PER_SEC / 400);
 
 /* Minimum number of assigned budgets for which stats are safe to compute. */
 static const int bfq_stats_min_budgets = 194;
@@ -4949,9 +4949,9 @@ static int bfq_init_queue(struct request_queue *q, struct elevator_type *e)
 	 * Trade-off between responsiveness and fairness.
 	 */
 	bfqd->bfq_wr_coeff = 30;
-	bfqd->bfq_wr_rt_max_time = msecs_to_jiffies(300);
-	bfqd->bfq_wr_max_time = 0;
-	bfqd->bfq_wr_min_idle_time = msecs_to_jiffies(2000);
+	bfqd->bfq_wr_rt_max_time = msecs_to_jiffies(120);
+	bfqd->bfq_wr_max_time = 2000;
+	bfqd->bfq_wr_min_idle_time = msecs_to_jiffies(0);
 	bfqd->bfq_wr_min_inter_arr_async = msecs_to_jiffies(500);
 	bfqd->bfq_wr_max_softrt_rate = 7000; /*
 					      * Approximate rate required
